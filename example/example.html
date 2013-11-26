@@ -1,0 +1,283 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>quick filter table plug-in</title>
+	<meta content="JQuery plugin table">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="example.css">
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="pbTable.js"></script>
+</head>
+
+<body>
+	<article class="container">
+		<section>
+			<h1 class="text-center">JQuery quick filter table plug-in</h1>
+			<p class="text-center">The easiest way to very elegant filter table data.</p>
+			<div class="text-center">
+				<a href="#firstExample" class="btn btn-primary">Examples</a>
+				<a class="btn btn-primary">Download</a>
+			</div>
+			
+			<p>
+				Version: 0.2 Beta<br>
+				To install: call JQuery and javascript plugin
+				<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">&lt;/script>
+&lt;script src="quickFilterTable.js">&lt;/script></pre>
+			</p>
+		</section>
+		<div id="firstExample">&nbsp;</div>
+	
+		<section>
+			<h1>Example 1<small> : Auto generate search box input</small></h1>
+			<hr>
+			
+			<p>Try to type any brand or an origin in the input below.</p>
+		
+			<table id="car-table" class="table table-striped conFiltro">
+				<thead>
+					<th class="col-lg-6">Brand</th>
+					<th>Origin</th>
+				
+				<tbody>
+					<tr>
+						<td>Fiat</td>
+						<td>Italian</td>
+					</tr>
+					<tr>
+						<td>Audi</td>
+						<td>German</td>
+					</tr>
+					<tr>
+						<td>Ferrari</td>
+						<td>Italian</td>
+					</tr>
+					<tr>
+						<td>Bugatti</td>
+						<td>French</td>
+					</tr>
+					<tr>
+						<td>Aston Martin</td>
+						<td>English</td>
+					</tr>
+					<tr>
+						<td>Chevrolet</td>
+						<td>USA</td>
+					</tr>
+					<tr>
+						<td>Lamborghini</td>
+						<td>Italian</td>
+					</tr>
+					<tr>
+						<td>Honda</td>
+						<td>Japanese</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<pre>
+<p>Just add  the "conFiltro" class in the table tag. The "id" attr is required.</p>
+&lt;table id="car-table" class="conFiltro">
+	&lt;thead>
+		&lt;th>Column 1&lt;/th>
+	&lt;/thead>
+	&lt;tbody>
+		...
+	&lt;tbody>
+&lt;/table>
+</pre>
+		</section>
+
+
+		<section>
+			<h1>Example 2<small>: using your custom search box input</small></h1>
+			<hr>
+			
+			<p>Try to type the listed fuits or the producer country (hidden attribute) like "Argentina", "Brasil", "Chile", "Ecuador" or "Panama"</p>
+			
+			<div class="row">
+				<div class="col-lg-4">
+					<input type="text" class="form-control" search-in="fruits-table">
+				</div>
+			</div>
+			<table id="fruits-table" class="table table-striped">
+				<thead>
+					<th class="col-lg-6">Fruits</th>
+					<th>Color</th>
+					<th hidden>Productor</th>
+				
+				<tbody>
+					<tr>
+						<td>Apple</td>
+						<td>Green</td>
+						<td hidden>Argentina</td>
+					</tr>
+					<tr>
+						<td>Banana</td>
+						<td>Yellow</td>
+						<td hidden>Ecuador</td>
+					</tr>
+					<tr>
+						<td>Cherry</td>
+						<td>Red</td>
+						<td hidden>Panama</td>
+					</tr>
+					<tr>
+						<td>Kiwi</td>
+						<td>Green</td>
+						<td hidden>Chile</td>
+					</tr>
+					<tr>
+						<td>Strawberry</td>
+						<td>Red</td>
+						<td hidden>Brasil</td>
+					</tr>
+					<tr>
+						<td>Melon</td>
+						<td>Red</td>
+						<td hidden>Brasil</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<pre>
+<p>Just add your input search somewhere into "&lt;body>" tag. Add the "search-in" attribute specifing the table id.</p>
+&lt;input type="text" search-in="fruits-table">
+&lt;table id="fruits-table">
+	&lt;thead>
+		&lt;th>Column 1&lt;/th>
+		&lt;th hidden>Column 2&lt;/th>
+	&lt;/thead>
+	&lt;tbody>
+		&lt;td>Value 1&lt;/td>
+		&lt;td hidden>Hidden value &lt;/td>
+	&lt;tbody>
+&lt;/table>
+</pre>
+		</section>
+		
+		
+		<section>
+			<h1>Example 3<small>: using quicks search tags</small></h1>
+			<hr>
+			
+			<p>Try to click on the quicks tags search</p>
+			
+			<div class="row">
+				<div class="col-lg-4">
+					<input id="colourSearchBox" type="text" class="form-control" search-in="colours-table">
+				</div>
+				<div class="col-lg-8">
+					<button class="btn btn-link quickTag" input-search="colourSearchBox">Primary</button>
+					<button class="btn btn-link quickTag" input-search="colourSearchBox">Secondary</button>
+				</div>
+			</div>
+			<table id="colours-table" class="table table-striped">
+				<thead>
+					<th class="col-lg-6">Colour</th>
+					<th>Type</th>
+				
+				<tbody>
+					<tr>
+						<td>Red</td>
+						<td>Primary</td>
+					</tr>
+					<tr>
+						<td>Blue</td>
+						<td>Primary</td>
+					</tr>
+					<tr>
+						<td>Green</td>
+						<td>Secondary</td>
+					</tr>
+					<tr>
+						<td>Purple</td>
+						<td>Secondary</td>
+					</tr>
+					<tr>
+						<td>Yellow</td>
+						<td>Primary</td>
+					</tr>
+					<tr>
+						<td>Orange</td>
+						<td>Secondary</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<pre>
+<p>Just add your input search somewhere into "&lt;body>" tag. Add the "search-in" attribute specifing the table id.
+Add a button or an "a" tag with the "quickTag" class. You have to add the "input-search" to indicate the search box id.
+</p>
+&lt;input id="colourSearchBox" type="text" class="form-control" search-in="colours-table">
+&lt;button class="quickTag" input-search="colourSearchBox">Primary&lt;button>
+&lt;button class="quickTag" input-search="colourSearchBox">Secondary&lt;button>
+&lt;table id="fruits-table">
+	&lt;thead>
+		&lt;th>Column 1&lt;/th>
+		&lt;th hidden>Column 2&lt;/th>
+	&lt;/thead>
+	&lt;tbody>
+		&lt;td>Value 1&lt;/td>
+		&lt;td hidden>Hidden value &lt;/td>
+	&lt;tbody>
+&lt;/table>
+</pre>
+		</section>
+		
+		<section>
+			<h1>Example 4<small>: using seletable table</small></h1>
+			<hr>
+			
+			<p>Try to click on table's rows</p>
+			<table id="colours-table" class="table table-striped selectable">
+				<thead>
+					<th class="col-lg-6">Colour</th>
+					<th>Type</th>
+				
+				<tbody>
+					<tr>
+						<td>Red</td>
+						<td>Primary</td>
+					</tr>
+					<tr>
+						<td>Blue</td>
+						<td>Primary</td>
+					</tr>
+					<tr>
+						<td>Green</td>
+						<td>Secondary</td>
+					</tr>
+					<tr>
+						<td>Purple</td>
+						<td>Secondary</td>
+					</tr>
+					<tr>
+						<td>Yellow</td>
+						<td>Primary</td>
+					</tr>
+					<tr>
+						<td>Orange</td>
+						<td>Secondary</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<pre>
+<p>Click on row's table</p>
+&lt;table id="fruits-table" class="selectable">
+	...
+&lt;/table>
+</pre>
+		</section>
+	</article>
+	
+	<div class="container">
+		<footer class="text-center">
+			Desarrollado por <a href="http://codement.com/CV/Piero-Blunda.html">Piero Blunda</a> | Nov-2013 | Rosario - Argentina
+		</footer>
+	</div>
+</body>
+</html>
