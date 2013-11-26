@@ -36,8 +36,3 @@ Opción 2:
 
 ## Licencia
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.es_ES"><img alt="Licencia de Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a><br />Este obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.es_ES">licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported</a>.
-=======
-=======
-
-JQuery plugin para mejorar tablas HTML
->>>>>>> 560f27988e7d5acfa70f98a5ab7fee4d5cfec61f
