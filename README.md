@@ -12,20 +12,14 @@ Requiere JQuery 1.9+
 
 
 ## Modo de uso
-pbModal tiene dos formas de usarlo: una es indicando que una tabla es "pbTable" mediande una clase y la otra es creando un text-input e indicando en qué tabla debe buscar.
+	$('#myTable').pbTable();
 
-Opción 1:
-
-	<table class="conFiltro">
-		...
-	</table>
-
-Opción 2:
-
-	<input type="text" search-in="fruits-table">
-	<table id="fruits-table">
-		...
-	</table>
+##Opciones por default
+	$('#myTable').pbTable({
+		selectable: true,		//indica si una fila de la tabla puede ser seleccionada
+		inputID:null,			//id del campo de busqueda
+		createSearchBox:true	//indica si pbTable debe crear automaticamente un campo de busqueda
+	});
 
 ## Navegadores compatibles
 * Chrome 6+

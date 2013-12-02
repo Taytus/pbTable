@@ -57,9 +57,7 @@
 		}
 		
 		//Con un input propio
-		console.log(options.inputID);
 		if(options.inputID!=null){
-			console.log('#'+options.inputID);
 			$('#'+options.inputID).attr('search-in', $(this).attr('id'));
 		}
 		
