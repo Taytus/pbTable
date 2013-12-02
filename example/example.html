@@ -8,7 +8,18 @@
 	<link rel="stylesheet" href="example.css">
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="pbTable.js"></script>
+	<script src="../pbTable.js"></script>
+	<script>
+		$(document).ready(function(e) {
+			$('#car-table').pbTable();
+			$('#fruits-table').pbTable({
+				inputID:'search-fruitsTable',
+				createSearchBox:false,
+				//tags:['Hola', 'Mundo', 'Piero']
+			});
+			$('#colours-table-2').pbTable();
+		});
+	</script>
 </head>
 
 <body>
@@ -24,9 +35,9 @@
 			<p>
 				Version: 0.2 Beta<br>
 				To install: call JQuery and javascript plugin
-				<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">&lt;/script>
-&lt;script src="quickFilterTable.js">&lt;/script></pre>
 			</p>
+			<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">&lt;/script>
+&lt;script src="quickFilterTable.js">&lt;/script></pre>
 		</section>
 		<div id="firstExample">&nbsp;</div>
 	
@@ -99,7 +110,7 @@
 			
 			<div class="row">
 				<div class="col-lg-4">
-					<input type="text" class="form-control" search-in="fruits-table">
+					<input id="search-fruitsTable" type="text" class="form-control">
 				</div>
 			</div>
 			<table id="fruits-table" class="table table-striped">
@@ -170,8 +181,8 @@
 					<input id="colourSearchBox" type="text" class="form-control" search-in="colours-table">
 				</div>
 				<div class="col-lg-8">
-					<button class="btn btn-link quickTag" input-search="colourSearchBox">Primary</button>
-					<button class="btn btn-link quickTag" input-search="colourSearchBox">Secondary</button>
+					<button class="btn btn-link" input-search="colourSearchBox">Primary</button>
+					<button class="btn btn-link" input-search="colourSearchBox">Secondary</button>
 				</div>
 			</div>
 			<table id="colours-table" class="table table-striped">
@@ -232,7 +243,7 @@ Add a button or an "a" tag with the "quickTag" class. You have to add the "input
 			<hr>
 			
 			<p>Try to click on table's rows</p>
-			<table id="colours-table" class="table table-striped selectable">
+			<table id="colours-table-2" class="table table-striped selectable">
 				<thead>
 					<th class="col-lg-6">Colour</th>
 					<th>Type</th>
