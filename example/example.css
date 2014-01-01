@@ -13,6 +13,10 @@ html, body{
 
 html, input {font-family: "Helvetica Neue",  Helvetica,  Arial,  sans-serif;}
 
+.btn-success, .btn-warning, .btn-danger, .btn-primary{
+	margin-left: 5px;
+}
+
 .anchor{margin:10px auto auto 0px;}
 section, footer{
 	margin-bottom:30px !important;

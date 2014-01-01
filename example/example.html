@@ -8,16 +8,49 @@
 	<link rel="stylesheet" href="example.css">
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="../pbTable.js"></script>
+	<script src="../pbTable.min.js"></script>
 	<script>
 		$(document).ready(function(e) {
-			$('#car-table').pbTable();
-			$('#fruits-table').pbTable({
-				inputID:'search-fruitsTable',
-				createSearchBox:false,
-				//tags:['Hola', 'Mundo', 'Piero']
+			$('#tablaDatos').pbTable({
+				selectable: true,
+				sortable:true,
+				toolbar:{
+					enabled:true,
+					filterBox:true,
+					tags:[
+						  {
+							display:'Todos',
+							toSearch:''
+						  },
+						  {
+							display:'Batman',
+							toSearch:'batman'
+						  },
+						  {
+							display:'CH',
+							toSearch:'Chapulin colorado'
+						  },
+						  {
+							display:'Hombre',
+							toSearch:'Hombre'
+						  },
+						  {
+							display:'Mujer',
+							toSearch:'Mujer'
+						  },
+						],
+					buttons:['view', 'edit', 'delete']
+				},
+				onView:function(){
+					alert('View button was pressed');
+				},
+				onEdit:function(){
+					alert('Edit button was pressed');
+				},
+				onDelete:function(){
+					alert('Delete button was pressed');
+				}
 			});
-			$('#colours-table-2').pbTable();
 		});
 	</script>
 </head>
@@ -25,264 +58,220 @@
 <body>
 	<article class="container">
 		<section>
-			<h1 class="text-center">JQuery quick filter table plug-in</h1>
-			<p class="text-center">The easiest way to very elegant filter table data.</p>
+			<h1 class="text-center">pbTable</h1>
+			<p class="text-center">Agrega funcionalidades a tus tablas</p>
 			<div class="text-center">
-				<a href="#firstExample" class="btn btn-primary">Examples</a>
-				<a class="btn btn-primary">Download</a>
+				<a class="btn btn-primary" href="https://github.com/pieroblunda/pbTable">Ver en GitHub</a>
+				<a class="btn btn-primary" href="https://github.com/pieroblunda/pbTable/archive/master.zip">Download</a>
 			</div>
-			
-			<p>
-				Version: 0.2 Beta<br>
-				To install: call JQuery and javascript plugin
-			</p>
-			<pre>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">&lt;/script>
-&lt;script src="quickFilterTable.js">&lt;/script></pre>
-		</section>
-		<div id="firstExample">&nbsp;</div>
-	
-		<section>
-			<h1>Example 1<small> : Auto generate search box input</small></h1>
-			<hr>
-			
-			<p>Try to type any brand or an origin in the input below.</p>
+			<p>&nbsp;</p>
 		
-			<table id="car-table" class="table table-striped conFiltro">
+			<table id="tablaDatos" class="table table-striped">
 				<thead>
-					<th class="col-lg-6">Brand</th>
-					<th>Origin</th>
-				
+					<tr>
+						<th class="col-md-2">Nro</th>
+						<th class="col-md-2">Procer</th>
+						<th class="col-md-9">Dscripci&oacute;n</th>
+						<th hidden>Sexo</th>
+					</tr>
+				</thead>
 				<tbody>
 					<tr>
-						<td>Fiat</td>
-						<td>Italian</td>
+						<td>1</td>
+						<td>Batman</td>
+						<td>Hombre murcielago. Puede pasar toda la noche sin dormir. Vive en ciudad Gotica</td>
+						<td hidden>Hombre</td>
 					</tr>
 					<tr>
-						<td>Audi</td>
-						<td>German</td>
+						<td>2</td>
+						<td>Robin</td>
+						<td>Es el ayudante de Batman.</td>
+						<td hidden>Hombre</td>
 					</tr>
 					<tr>
-						<td>Ferrari</td>
-						<td>Italian</td>
+						<td>3</td>
+						<td>Superman</td>
+						<td>Es un hombre comun, pero tiene super-poderes. Puede volar. Es novio de Luisa Lane</td>
+						<td hidden>Hombre</td>
 					</tr>
 					<tr>
-						<td>Bugatti</td>
-						<td>French</td>
+						<td>4</td>
+						<td>El Zorro</td>
+						<td>Superheroe latinoamericano. Es en realidad Don Diego de La Vega. Es muy astuto.</td>
+						<td hidden>Hombre</td>
 					</tr>
 					<tr>
-						<td>Aston Martin</td>
-						<td>English</td>
+						<td>5</td>
+						<td>Chapulin colorado</td>
+						<td>Más ágil que una tortuga, más noble que una lechuga... su escudo es un corazón.</td>
+						<td hidden>Hombre</td>
 					</tr>
 					<tr>
-						<td>Chevrolet</td>
-						<td>USA</td>
-					</tr>
-					<tr>
-						<td>Lamborghini</td>
-						<td>Italian</td>
-					</tr>
-					<tr>
-						<td>Honda</td>
-						<td>Japanese</td>
+						<td>6</td>
+						<td>Wonder Woman</td>
+						<td>Es una chica. Usa culotte muy grande y tiene un lazo.</td>
+						<td hidden>Mujer</td>
 					</tr>
 				</tbody>
 			</table>
 			
+			Opciones por defecto:
+			<pre>$('#tablaDatos').pbTable();</pre>
+			
+			Opciones usadas en este ejemplo:
 			<pre>
-<p>Just add  the "conFiltro" class in the table tag. The "id" attr is required.</p>
-&lt;table id="car-table" class="conFiltro">
-	&lt;thead>
-		&lt;th>Column 1&lt;/th>
-	&lt;/thead>
-	&lt;tbody>
-		...
-	&lt;tbody>
-&lt;/table>
-</pre>
-		</section>
-
-
-		<section>
-			<h1>Example 2<small>: using your custom search box input</small></h1>
-			<hr>
-			
-			<p>Try to type the listed fuits or the producer country (hidden attribute) like "Argentina", "Brasil", "Chile", "Ecuador" or "Panama"</p>
-			
-			<div class="row">
-				<div class="col-lg-4">
-					<input id="search-fruitsTable" type="text" class="form-control">
-				</div>
-			</div>
-			<table id="fruits-table" class="table table-striped">
-				<thead>
-					<th class="col-lg-6">Fruits</th>
-					<th>Color</th>
-					<th hidden>Productor</th>
-				
-				<tbody>
-					<tr>
-						<td>Apple</td>
-						<td>Green</td>
-						<td hidden>Argentina</td>
-					</tr>
-					<tr>
-						<td>Banana</td>
-						<td>Yellow</td>
-						<td hidden>Ecuador</td>
-					</tr>
-					<tr>
-						<td>Cherry</td>
-						<td>Red</td>
-						<td hidden>Panama</td>
-					</tr>
-					<tr>
-						<td>Kiwi</td>
-						<td>Green</td>
-						<td hidden>Chile</td>
-					</tr>
-					<tr>
-						<td>Strawberry</td>
-						<td>Red</td>
-						<td hidden>Brasil</td>
-					</tr>
-					<tr>
-						<td>Melon</td>
-						<td>Red</td>
-						<td hidden>Brasil</td>
-					</tr>
-				</tbody>
-			</table>
-			
-			<pre>
-<p>Just add your input search somewhere into "&lt;body>" tag. Add the "search-in" attribute specifing the table id.</p>
-&lt;input type="text" search-in="fruits-table">
-&lt;table id="fruits-table">
-	&lt;thead>
-		&lt;th>Column 1&lt;/th>
-		&lt;th hidden>Column 2&lt;/th>
-	&lt;/thead>
-	&lt;tbody>
-		&lt;td>Value 1&lt;/td>
-		&lt;td hidden>Hidden value &lt;/td>
-	&lt;tbody>
-&lt;/table>
-</pre>
+$('#tablaDatos').pbTable({
+	selectable: true,
+	sortable:true,
+	toolbar:{
+		enabled:true,
+		filterBox:true,
+		tags:[
+			  {
+				display:'Todos',
+				toSearch:''
+			  },
+			  {
+				display:'Batman',
+				toSearch:'batman'
+			  },
+			  {
+				display:'CH',
+				toSearch:'Chapulin colorado'
+			  },
+			  {
+				display:'Hombre',
+				toSearch:'Hombre'
+			  },
+			  {
+				display:'Mujer',
+				toSearch:'Mujer'
+			  },
+			],
+		buttons:['view', 'edit', 'delete']
+	},
+	onView:function(){
+		alert('View button was pressed');
+	},
+	onEdit:function(){
+		alert('Edit button was pressed');
+	},
+	onDelete:function(){
+		alert('Delete button was pressed');
+	}
+});</pre>
 		</section>
 		
+<section>
+                <h1>Properties</h1>
+                <hr>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Property</td>
+                            <td>Data</td>
+                            <td>Default value</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>selectable</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si pueden seleccionarse las filas de la tabla</td>
+                        </tr>
+                        <tr>
+                            <td>sortable</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si pueden ordenarse las filas de la tabla</td>
+                        </tr>
+                        <tr>
+                            <td>toolbar</td>
+                            <td>Object</td>
+                            <td>-</td>
+                            <td>Contiene las propiedades de la barra superior de la tabla</td>
+                        </tr>
+                        <tr>
+                            <td>toolbar.enabled</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Indica si la barra superior de la tabla esta visible</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.filterBox</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Indica si la barra superior contiene un cuadro de busquedas</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.tags</td>
+                            <td>Array de Objetos</td>
+                            <td>[{display:'Todos', toSearch:''}]</td>
+                            <td>Contiene las propiedades de los tags rapidos del cuadro de busqueda</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.tags.display</td>
+                            <td>String</td>
+                            <td>-</td>
+                            <td>Cadena a mostrar para para el tag correspondiente</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.tags.toSearch</td>
+                            <td>String</td>
+                            <td>-</td>
+                            <td>Cadena a buscar para para el tag correspondiente</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.buttons</td>
+                            <td>Array de Strings</td>
+                            <td>['view', 'edit', 'delete', 'new', 'print', 'receipt']</td>
+                            <td>Lista de botones que se mostraran en la barra superior</td>
+                        </tr>
+                   </tbody>
+                </table>
+            </section>
+            
+            <section>
+                <h1>Callbacks</h1>
+                <hr>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>    
+                    <tbody>
+                        <tr>
+                            <td>onView</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Ver"</td>
+                        </tr>
+                        <tr>
+                            <td>onEdit</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Editar"</td>
+                        </tr>
+						<tr>
+                            <td>onDelete</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Delete"</td>
+                        </tr>
+						<tr>
+                            <td>onNew</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Nuevo"</td>
+                        </tr>
+                        <tr>
+                            <td>onPrint</td>
+                           <td>funcion. Se ejecuta al presionar el boton "Imprimir"</td>
+                        </tr>
+						<tr>
+                            <td>onReceipt</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Recibo"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
 		
-		<section>
-			<h1>Example 3<small>: using quicks search tags</small></h1>
-			<hr>
-			
-			<p>Try to click on the quicks tags search</p>
-			
-			<div class="row">
-				<div class="col-lg-4">
-					<input id="colourSearchBox" type="text" class="form-control" search-in="colours-table">
-				</div>
-				<div class="col-lg-8">
-					<button class="btn btn-link" input-search="colourSearchBox">Primary</button>
-					<button class="btn btn-link" input-search="colourSearchBox">Secondary</button>
-				</div>
-			</div>
-			<table id="colours-table" class="table table-striped">
-				<thead>
-					<th class="col-lg-6">Colour</th>
-					<th>Type</th>
-				
-				<tbody>
-					<tr>
-						<td>Red</td>
-						<td>Primary</td>
-					</tr>
-					<tr>
-						<td>Blue</td>
-						<td>Primary</td>
-					</tr>
-					<tr>
-						<td>Green</td>
-						<td>Secondary</td>
-					</tr>
-					<tr>
-						<td>Purple</td>
-						<td>Secondary</td>
-					</tr>
-					<tr>
-						<td>Yellow</td>
-						<td>Primary</td>
-					</tr>
-					<tr>
-						<td>Orange</td>
-						<td>Secondary</td>
-					</tr>
-				</tbody>
-			</table>
-			
-			<pre>
-<p>Just add your input search somewhere into "&lt;body>" tag. Add the "search-in" attribute specifing the table id.
-Add a button or an "a" tag with the "quickTag" class. You have to add the "input-search" to indicate the search box id.
-</p>
-&lt;input id="colourSearchBox" type="text" class="form-control" search-in="colours-table">
-&lt;button class="quickTag" input-search="colourSearchBox">Primary&lt;button>
-&lt;button class="quickTag" input-search="colourSearchBox">Secondary&lt;button>
-&lt;table id="fruits-table">
-	&lt;thead>
-		&lt;th>Column 1&lt;/th>
-		&lt;th hidden>Column 2&lt;/th>
-	&lt;/thead>
-	&lt;tbody>
-		&lt;td>Value 1&lt;/td>
-		&lt;td hidden>Hidden value &lt;/td>
-	&lt;tbody>
-&lt;/table>
-</pre>
-		</section>
-		
-		<section>
-			<h1>Example 4<small>: using seletable table</small></h1>
-			<hr>
-			
-			<p>Try to click on table's rows</p>
-			<table id="colours-table-2" class="table table-striped selectable">
-				<thead>
-					<th class="col-lg-6">Colour</th>
-					<th>Type</th>
-				
-				<tbody>
-					<tr>
-						<td>Red</td>
-						<td>Primary</td>
-					</tr>
-					<tr>
-						<td>Blue</td>
-						<td>Primary</td>
-					</tr>
-					<tr>
-						<td>Green</td>
-						<td>Secondary</td>
-					</tr>
-					<tr>
-						<td>Purple</td>
-						<td>Secondary</td>
-					</tr>
-					<tr>
-						<td>Yellow</td>
-						<td>Primary</td>
-					</tr>
-					<tr>
-						<td>Orange</td>
-						<td>Secondary</td>
-					</tr>
-				</tbody>
-			</table>
-			
-			<pre>
-<p>Click on row's table</p>
-&lt;table id="fruits-table" class="selectable">
-	...
-&lt;/table>
-</pre>
-		</section>
 	</article>
 	
 	<div class="container">

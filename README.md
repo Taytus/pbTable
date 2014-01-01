@@ -1,7 +1,7 @@
 pbTable
 ===========================
 
-pbModal es un plugin para JQuery que permite mejorar la fucionalidad de las tablas HTML. Permite buscar facilmente entre los campos de la tabla.
+pbModal es un plugin para JQuery que permite agregar nuevas fucionalidad de las tablas HTML. Esta orientado a crar rapidamente una interfaz para ABMC y hacer busquedas.
 
 Requiere JQuery 1.9+
 
@@ -16,10 +16,123 @@ Requiere JQuery 1.9+
 
 ##Opciones por default
 	$('#myTable').pbTable({
-		selectable: true,		//indica si una fila de la tabla puede ser seleccionada
-		inputID:null,			//id del campo de busqueda
-		createSearchBox:true	//indica si pbTable debe crear automaticamente un campo de busqueda
+		selectable: true,
+		sortable:true,
+		toolbar:{
+			enabled:true,
+			filterBox:true,
+			tags:[{display:'Todos', toSearch:''}],
+			buttons:['view', 'edit', 'delete', 'new', 'print', 'receipt']
+		}
 	});
+
+## Propiedades
+<table width="100%">
+<thead>
+                        <tr>
+                            <td>Property</td>
+                            <td>Data</td>
+                            <td>Default value</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>selectable</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si pueden seleccionarse las filas de la tabla</td>
+                        </tr>
+                        <tr>
+                            <td>sortable</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si pueden ordenarse las filas de la tabla</td>
+                        </tr>
+                        <tr>
+                            <td>toolbar</td>
+                            <td>Object</td>
+                            <td>-</td>
+                            <td>Contiene las propiedades de la barra superior de la tabla</td>
+                        </tr>
+                        <tr>
+                            <td>toolbar.enabled</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si la barra superior de la tabla esta visible</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.filterBox</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si la barra superior contiene un cuadro de busquedas</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.tags</td>
+                            <td>Array de Objetos</td>
+                            <td>[{display:'Todos', toSearch:''}]</td>
+                            <td>Contiene las propiedades de los tags rapidos del cuadro de busqueda</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.tags.display</td>
+                            <td>String</td>
+                            <td>-</td>
+                            <td>Cadena a mostrar para para el tag correspondiente</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.tags.toSearch</td>
+                            <td>String</td>
+                            <td>-</td>
+                            <td>Cadena a buscar para para el tag correspondiente</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.buttons</td>
+                            <td>Array de Strings</td>
+                            <td>['view', 'edit', 'delete', 'new', 'print', 'receipt']</td>
+                            <td>Lista de botones que se mostraran en la barra superior</td>
+                        </tr>
+                   </tbody>
+                </table>
+
+## Callbacks
+
+<table width="100%">
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>    
+                    <tbody>
+                        <tr>
+                            <td>onView</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Ver"</td>
+                        </tr>
+                        <tr>
+                            <td>onEdit</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Editar"</td>
+                        </tr>
+						<tr>
+                            <td>onDelete</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Delete"</td>
+                        </tr>
+						<tr>
+                            <td>onNew</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Nuevo"</td>
+                        </tr>
+                        <tr>
+                            <td>onPrint</td>
+                           <td>funcion. Se ejecuta al presionar el boton "Imprimir"</td>
+                        </tr>
+						<tr>
+                            <td>onReceipt</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Recibo"</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+##Documentacion y ejemplos
+	http://www.miejemplo.com
 
 ## Navegadores compatibles
 * Chrome 6+
