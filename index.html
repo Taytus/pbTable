@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>pbTable by pieroblunda</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>pbTable</h1>
+        <h2>JQuery plugin para mejorar tablas HTML</h2>
+        <a href="https://github.com/pieroblunda/pbTable" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="pbtable" class="anchor" href="#pbtable"><span class="octicon octicon-link"></span></a>pbTable</h1>
+
+<p>pbModal es un plugin para JQuery que permite agregar nuevas fucionalidad de las tablas HTML. Esta orientado a crar rapidamente una interfaz para ABMC y hacer busquedas.</p>
+
+<p>Requiere JQuery 1.9+</p>
+
+<h2>
+<a name="installaci%C3%B3n" class="anchor" href="#installaci%C3%B3n"><span class="octicon octicon-link"></span></a>Installación</h2>
+
+<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="pbTable.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<h2>
+<a name="modo-de-uso" class="anchor" href="#modo-de-uso"><span class="octicon octicon-link"></span></a>Modo de uso</h2>
+
+<pre><code>$('#myTable').pbTable();
+</code></pre>
+
+<h2>
+<a name="opciones-por-default" class="anchor" href="#opciones-por-default"><span class="octicon octicon-link"></span></a>Opciones por default</h2>
+
+<pre><code>$('#myTable').pbTable({
+    selectable: true,
+    sortable:true,
+    toolbar:{
+        enabled:true,
+        filterBox:true,
+        tags:[{display:'Todos', toSearch:''}],
+        buttons:['view', 'edit', 'delete', 'new', 'print', 'receipt']
+    }
+});
+</code></pre>
+
+<h2>
+<a name="propiedades" class="anchor" href="#propiedades"><span class="octicon octicon-link"></span></a>Propiedades</h2>
+
+<table width="100%">
+<thead><tr>
+<td>Property</td>
+                            <td>Data</td>
+                            <td>Default value</td>
+                            <td>Description</td>
+                        </tr></thead>
+<tbody>
+<tr>
+<td>selectable</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si pueden seleccionarse las filas de la tabla</td>
+                        </tr>
+<tr>
+<td>sortable</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si pueden ordenarse las filas de la tabla</td>
+                        </tr>
+<tr>
+<td>toolbar</td>
+                            <td>Object</td>
+                            <td>-</td>
+                            <td>Contiene las propiedades de la barra superior de la tabla</td>
+                        </tr>
+<tr>
+<td>toolbar.enabled</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si la barra superior de la tabla esta visible</td>
+                        </tr>
+<tr>
+<td>toolbar.filterBox</td>
+                            <td>Boolean</td>
+                            <td>true</td>
+                            <td>Indica si la barra superior contiene un cuadro de busquedas</td>
+                        </tr>
+<tr>
+<td>toolbar.tags</td>
+                            <td>Array de Objetos</td>
+                            <td>[{display:'Todos', toSearch:''}]</td>
+                            <td>Contiene las propiedades de los tags rapidos del cuadro de busqueda</td>
+                        </tr>
+<tr>
+<td>toolbar.tags.display</td>
+                            <td>String</td>
+                            <td>-</td>
+                            <td>Cadena a mostrar para para el tag correspondiente</td>
+                        </tr>
+<tr>
+<td>toolbar.tags.toSearch</td>
+                            <td>String</td>
+                            <td>-</td>
+                            <td>Cadena a buscar para para el tag correspondiente</td>
+                        </tr>
+<tr>
+<td>toolbar.buttons</td>
+                            <td>Array de Strings</td>
+                            <td>['view', 'edit', 'delete', 'new', 'print', 'receipt']</td>
+                            <td>Lista de botones que se mostraran en la barra superior</td>
+                        </tr>
+</tbody>
+</table><h2>
+<a name="callbacks" class="anchor" href="#callbacks"><span class="octicon octicon-link"></span></a>Callbacks</h2>
+
+<table width="100%">
+<thead><tr>
+<td>Name</td>
+                            <td>Description</td>
+                        </tr></thead>
+<tbody>
+<tr>
+<td>onView</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Ver"</td>
+                        </tr>
+<tr>
+<td>onEdit</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Editar"</td>
+                        </tr>
+<tr>
+<td>onDelete</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Delete"</td>
+                        </tr>
+<tr>
+<td>onNew</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Nuevo"</td>
+                        </tr>
+<tr>
+<td>onPrint</td>
+                           <td>funcion. Se ejecuta al presionar el boton "Imprimir"</td>
+                        </tr>
+<tr>
+<td>onReceipt</td>
+                            <td>funcion. Se ejecuta al presionar el boton "Recibo"</td>
+                        </tr>
+</tbody>
+</table><h2>
+<a name="documentacion-y-ejemplos" class="anchor" href="#documentacion-y-ejemplos"><span class="octicon octicon-link"></span></a>Documentacion y ejemplos</h2>
+
+<pre><code>http://www.miejemplo.com
+</code></pre>
+
+<h2>
+<a name="navegadores-compatibles" class="anchor" href="#navegadores-compatibles"><span class="octicon octicon-link"></span></a>Navegadores compatibles</h2>
+
+<ul>
+<li>Chrome 6+</li>
+<li>Firefox 4+</li>
+<li>Safari 5+</li>
+<li>Opera 11+</li>
+<li>Internet Explorer 9+</li>
+</ul><h2>
+<a name="licencia" class="anchor" href="#licencia"><span class="octicon octicon-link"></span></a>Licencia</h2>
+
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.es_ES"><img alt="Licencia de Creative Commons" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"></a><br>Este obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.es_ES">licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported</a>.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/pieroblunda/pbTable/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/pieroblunda/pbTable/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/pieroblunda/pbTable"></a> is maintained by <a href="https://github.com/pieroblunda">pieroblunda</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
