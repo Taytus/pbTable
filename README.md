@@ -132,7 +132,7 @@ Requiere JQuery 1.9+
                 </table>
 
 ##Documentacion y ejemplos
-	http://www.miejemplo.com
+	http://pieroblunda.github.io/pbTable/
 
 ## Navegadores compatibles
 * Chrome 6+
