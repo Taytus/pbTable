@@ -25,8 +25,6 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 		//herencia de las opciones definidasa por el usuario
 		var options = jQuery.extend(true, options_default, options_user);
 		
-		
-		
 		//Definicion de los objetos que se agregan
 		var myTable = $(this);
 		var txtSearchBox = '<input id="search-' + myTable.attr('id') + '" search-in="' + myTable.attr('id') + '" type="search" class="form-control" placeholder="Buscar...">',
