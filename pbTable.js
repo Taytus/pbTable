@@ -28,8 +28,8 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 		
 		
 		//Definicion de los objetos que se agregan
-		var myTable = $(this),
-		    txtSearchBox = '<input id="search-tablaDatos" search-in="tablaDatos" type="search" class="form-control" placeholder="Buscar...">',
+		var myTable = $(this);
+		var txtSearchBox = '<input id="search-' + myTable.attr('id') + '" search-in="' + myTable.attr('id') + '" type="search" class="form-control" placeholder="Buscar...">',
 		    btnView ='<button id="btn-View" class="btn btn-success">Ver</button>',
 		    btnEdit ='<button id="btn-Edit" class="btn btn-warning">Editar</button>',
 		    btnDelete ='<button id="btn-Delete" class="btn btn-danger">Eliminar</button>',
@@ -41,7 +41,7 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 			divContainer +=	'<div name="sectionForSearchBox" class="col-lg-3"></div>';
 			divContainer +=	'<div name="sectionForTags" class="col-lg-4"></div>';
 			divContainer +=	'<div name="sectionForButtons" class="col-lg-5 text-right"></div>';
-			divContainer +='</div><br>';
+			divContainer +='</div>';
 		
 		//selectable
 		if(options.selectable){
