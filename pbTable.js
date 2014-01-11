@@ -142,9 +142,22 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 	//jQuery expression for case-insensitive filter
 	$.extend($.expr[":"], {
 		"contains-ci": function(elem, i, match, array){
-			return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+			//elem -> pajar
+			//match[3] -> aguja
+			match[3] = omitirAcentos(match[3]);
+			//return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+			return (omitirAcentos(elem.innerHTML) || elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
 		}
 	});
+	
+	function omitirAcentos(text) {
+		var acentos  = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç";
+		var original = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc";
+		for (var i=0; i<acentos.length; i++) {
+			text = text.replace(acentos.charAt(i), original.charAt(i));
+		}
+		return text;
+	};
 	
 	function filtrarTabla(campoBusqueda, textoBusqueda){
 		if(textoBusqueda != undefined)
