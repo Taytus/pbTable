@@ -136,7 +136,31 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 			$('input[search-in]').keyup(function(){
 				filtrarTabla($(this));
 			});
-		}
+		} //if options.toolbar enabled
+		
+		function onView(){
+                options.onView.call(this);
+        }
+        
+        function onEdit(){
+                options.onEdit.call(this);
+        }
+        
+        function onDelete(){
+                options.onDelete.call(this);
+        }
+        
+        function onNew(){
+                options.onNew.call(this);
+        }
+        
+        function onPrint(){
+                options.onPrint.call(this);
+        }
+        
+        function onReceipt(){
+                options.onReceipt.call(this);
+        }
 	};
 
 	//jQuery expression for case-insensitive filter
@@ -173,31 +197,7 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 	}
 	
 	function addButton(myTable, myButton){
-		$('#' + myTable.attr('id') + '-pbToolbar div[name="sectionForButtons"]').append(myButton);
-	}
-	
-	function onView(){
-		options.onView.call(this);
-	}
-	
-	function onEdit(){
-		options.onEdit.call(this);
-	}
-	
-	function onDelete(){
-		options.onDelete.call(this);
-	}
-	
-	function onNew(){
-		options.onNew.call(this);
-	}
-	
-	function onPrint(){
-		options.onPrint.call(this);
-	}
-	
-	function onReceipt(){
-		options.onReceipt.call(this);
+		$('#' + myTable.attr('id') + '-pbToolbar div[name="sectionForButtons"]').append('&nbsp;' + myButton);
 	}
 	
 	function pbSortable(){
