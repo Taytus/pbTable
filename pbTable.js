@@ -15,10 +15,10 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 			selectable: true,
 			sortable:true,
 			toolbar:{
-				enabled:true,
-				filterBox:true,
-				tags:[{display:'Todos', toSearch:''}],
-				buttons:['view', 'edit', 'delete', 'new', 'print', 'receipt']
+					enabled:true,
+					filterBox:true,
+					tags:[{display:'Todos', toSearch:''}],
+					buttons:['view', 'edit', 'delete', 'new', 'print', 'receipt']
 			}
 		};
 		
@@ -28,17 +28,17 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 		//Definicion de los objetos que se agregan
 		var myTable = $(this);
 		var txtSearchBox = '<input id="search-' + myTable.attr('id') + '" search-in="' + myTable.attr('id') + '" type="search" class="form-control" placeholder="Buscar...">',
-		    btnView ='<button id="btn-View" class="btn btn-success">Ver</button>',
-		    btnEdit ='<button id="btn-Edit" class="btn btn-warning">Editar</button>',
-		    btnDelete ='<button id="btn-Delete" class="btn btn-danger">Eliminar</button>',
+		    btnView ='<button id="btn-View" class="btn btn-success" disabled>Ver</button>',
+		    btnEdit ='<button id="btn-Edit" class="btn btn-warning" disabled>Editar</button>',
+		    btnDelete ='<button id="btn-Delete" class="btn btn-danger" disabled>Eliminar</button>',
 		    btnNew ='<button id="btn-New" class="btn btn-primary">Nuevo</button>',
-		    btnPrint = '<button id="btn-Print" class="btn btn-primary">Print</button>',
+		    btnPrint = '<button id="btn-Print" class="btn btn-primary">Imprimir</button>',
 		    btnReceipt = '<button id="btn-Receipt" class="btn btn-primary">Recibo</button>',
 		
 		    divContainer = '<div id="' + myTable.attr('id') + '-pbToolbar' + '" class="row">';
 			divContainer +=	'<div name="sectionForSearchBox" class="col-lg-3"></div>';
 			divContainer +=	'<div name="sectionForTags" class="col-lg-4"></div>';
-			divContainer +=	'<div name="sectionForButtons" class="col-lg-5 text-right"></div>';
+			divContainer +=	'<div name="sectionForButtons" class="col-lg-5 col-xs-12 col-sm-12 text-right"></div>';
 			divContainer +='</div>';
 		
 		//selectable
@@ -46,13 +46,21 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 			$(this).children('tbody').css('cursor', 'pointer');
 			$(this).children('tbody').children('tr').on('click', function(){
 				
-				if($(this).hasClass('warning'))
+				if($(this).hasClass('warning')){
 				    var thisTieneClass = 1;
+					$('#btn-View').attr('disabled', 'disabled');
+					$('#btn-Edit').attr('disabled', 'disabled');
+					$('#btn-Delete').attr('disabled', 'disabled');
+				}
 				
 				myTable.children('tbody').children('tr').removeClass('warning');
 				
-				if(thisTieneClass != 1)
+				if(thisTieneClass != 1){
 				    $(this).addClass('warning');
+					$('#btn-View').removeAttr('disabled');
+					$('#btn-Edit').removeAttr('disabled');
+					$('#btn-Delete').removeAttr('disabled');
+				}
 				
 			});
 		};

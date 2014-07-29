@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="example.css">
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="../pbTable.min.js"></script>
+	<script src="../pbTable.js"></script>
 	<script>
 		$(document).ready(function(e) {
 			$('#tablaDatos').pbTable({
@@ -272,6 +272,25 @@ $('#tablaDatos').pbTable({
                 </table>
             </section>
 		
+			<section>
+                <h1>Methods</h1>
+                <hr>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>    
+                    <tbody>
+                        <tr>
+                            <td>pbTableSearch</td>
+                            <td>function. Dispara la accion de busqueda</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+		
 	</article>
 	
 	<div class="container">
@@ -279,5 +298,11 @@ $('#tablaDatos').pbTable({
 			Desarrollado por <a href="http://codement.com/CV/Piero-Blunda.html">Piero Blunda</a> | Nov-2013 | Rosario - Argentina
 		</footer>
 	</div>
+	<script>
+		$(document).ready(function(){
+			$('#search-tablaDatos').val('Batman');
+			$('#search-tablaDatos').pbTableSearch();
+		});
+	</script>
 </body>
 </html>
