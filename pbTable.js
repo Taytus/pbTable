@@ -14,6 +14,7 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 		var options_default = {
 			selectable: true,
 			sortable:true,
+			msgSinDatos:'No se encontraron resultados.',
 			toolbar:{
 					enabled:true,
 					filterBox:true,
@@ -41,7 +42,12 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 			divContainer +=	'<div name="sectionForButtons" class="col-lg-5 col-xs-12 col-sm-12 text-right"></div>';
 			divContainer +='</div>';
 		
-		//selectable
+		//Agrega fila para "No se encontraron resultados"
+		cantidadDeColumnas = $('#'+myTable.attr('id')+ ' thead tr:first th').length;
+		$(this).children('tbody').append('<tr name="filaMsgSinDatos"><td colspan="'+cantidadDeColumnas+'"><i>'+options.msgSinDatos+'</i></td></tr>');
+		$('#'+myTable.attr('id')+ ' tbody tr[name="filaMsgSinDatos"]').hide();
+		
+		//Selectable
 		if(options.selectable){
 			$(this).children('tbody').css('cursor', 'pointer');
 			$(this).children('tbody').children('tr').on('click', function(){
@@ -169,6 +175,8 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
         function onReceipt(){
                 options.onReceipt.call(this);
         }
+		
+		
 	};
 
 	//jQuery expression for case-insensitive filter
@@ -202,6 +210,12 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 			$("#"+miTabla+" tbody>tr").hide();
 			$("#"+miTabla+" td:contains-ci('" + campoBusqueda.val() + "')").parent("tr").show();
 		};
+		
+		if($("#"+miTabla+" tbody>tr:visible").length == 0){
+			$('#'+miTabla+ ' tbody tr[name="filaMsgSinDatos"]').show();
+		}else{
+			$('#'+miTabla+ ' tbody tr[name="filaMsgSinDatos"]').hide();
+		}
 	}
 	
 	function addButton(myTable, myButton){

@@ -195,15 +195,21 @@ $('#tablaDatos').pbTable({
                         </tr>
                         <tr>
                             <td>toolbar.enabled</td>
-                            <td>boolean</td>
+                            <td>Boolean</td>
                             <td>true</td>
                             <td>Indica si la barra superior de la tabla esta visible</td>
                         </tr>
 						<tr>
                             <td>toolbar.filterBox</td>
-                            <td>boolean</td>
+                            <td>Boolean</td>
                             <td>true</td>
                             <td>Indica si la barra superior contiene un cuadro de busquedas</td>
+                        </tr>
+						<tr>
+                            <td>toolbar.msgSinDatos</td>
+                            <td>String</td>
+                            <td>'No se encontraron resultados.'</td>
+                            <td>Mensaje a postrar cuando no se encuentran resultados</td>
                         </tr>
 						<tr>
                             <td>toolbar.tags</td>
@@ -298,11 +304,5 @@ $('#tablaDatos').pbTable({
 			Desarrollado por <a href="http://codement.com/CV/Piero-Blunda.html">Piero Blunda</a> | Nov-2013 | Rosario - Argentina
 		</footer>
 	</div>
-	<script>
-		$(document).ready(function(){
-			$('#search-tablaDatos').val('Batman');
-			$('#search-tablaDatos').pbTableSearch();
-		});
-	</script>
 </body>
 </html>
