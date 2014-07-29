@@ -208,8 +208,8 @@ $('#tablaDatos').pbTable({
 						<tr>
                             <td>toolbar.tags</td>
                             <td>Array de Objetos</td>
-                            <td>[{display:'Todos', toSearch:''}]</td>
-                            <td>Contiene las propiedades de los tags rapidos del cuadro de busqueda</td>
+                            <td>[{display:'Todos', toSearch:''}] || false</td>
+                            <td>Contiene las propiedades de los tags rapidos del cuadro de búsqueda. En caso de no usar los botones, usar valor "false".</td>
                         </tr>
 						<tr>
                             <td>toolbar.tags.display</td>
@@ -226,8 +226,8 @@ $('#tablaDatos').pbTable({
 						<tr>
                             <td>toolbar.buttons</td>
                             <td>Array de Strings</td>
-                            <td>['view', 'edit', 'delete', 'new', 'print', 'receipt']</td>
-                            <td>Lista de botones que se mostraran en la barra superior</td>
+                            <td>['view', 'edit', 'delete', 'new', 'print', 'receipt'] || false</td>
+                            <td>Lista de botones que se mostraran en la barra superior. En caso de no usar los botones, usar valor "false".</td>
                         </tr>
                    </tbody>
                 </table>
