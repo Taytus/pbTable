@@ -177,7 +177,7 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
         }
 		
 		$(document).on('keydown', function(e){
-			moverConFlechas(myTable, e);
+			accionesDeTeclado(myTable, e, options.onView, options.onDelete);
 		});
 		
 		
@@ -195,13 +195,21 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 	});
 	
 	
-	function moverConFlechas(myTable, e){
-		if(myTable.children('tbody').children('tr').hasClass('warning')){
+	function accionesDeTeclado(myTable, e, onView, onDelete){
+		if(myTable.children('tbody').children('tr').hasClass('warning')){ //Si hay seleccionado una fila
 			if(e.keyCode == 38) //Flecha arribla
 				$('#'+myTable.attr('id')+' tbody tr.warning').removeClass('warning').prev('tr').addClass('warning');
 			
 			if(e.keyCode == 40) //Flecha abajo
 				$('#'+myTable.attr('id')+' tbody tr.warning').removeClass('warning').next('tr').addClass('warning');
+			
+			if(e.keyCode == 32 || e.keyCode == 13) //Barra espaciadora
+				onView();
+			
+			if(e.keyCode == 8 || e.keyCode == 46){ //Supr(8)  -- Delete(46)
+				e.preventDefault();
+				onDelete();
+			}
 		}
 	}
 	
