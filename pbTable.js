@@ -176,6 +176,10 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
                 options.onReceipt.call(this);
         }
 		
+		$(document).on('keydown', function(e){
+			moverConFlechas(myTable, e);
+		});
+		
 		
 	};
 
@@ -189,6 +193,17 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 			return (omitirAcentos(elem.innerHTML) || elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
 		}
 	});
+	
+	
+	function moverConFlechas(myTable, e){
+		if(myTable.children('tbody').children('tr').hasClass('warning')){
+			if(e.keyCode == 38) //Flecha arribla
+				$('#'+myTable.attr('id')+' tbody tr.warning').removeClass('warning').prev('tr').addClass('warning');
+			
+			if(e.keyCode == 40) //Flecha abajo
+				$('#'+myTable.attr('id')+' tbody tr.warning').removeClass('warning').next('tr').addClass('warning');
+		}
+	}
 	
 	function omitirAcentos(text) {
 		var acentos  = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç";
