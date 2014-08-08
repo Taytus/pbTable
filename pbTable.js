@@ -12,12 +12,16 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 (function($){
 	$.fn.pbTable = function(options_user){
 		var options_default = {
+			title:'MyTitle',
 			selectable: true,
 			sortable:true,
+			isMobile:false,
 			msgSinDatos:'No se encontraron resultados.',
 			toolbar:{
 					enabled:true,
+					idToAppend:'undefined',
 					filterBox:true,
+					selectedClass:'selected',
 					tags:[{display:'Todos', toSearch:''}],
 					buttons:['view', 'edit', 'delete', 'new', 'print', 'receipt']
 			}
@@ -29,18 +33,34 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 		//Definicion de los objetos que se agregan
 		var myTable = $(this);
 		var txtSearchBox = '<input id="search-' + myTable.attr('id') + '" search-in="' + myTable.attr('id') + '" type="search" class="form-control" placeholder="Buscar...">',
-		    btnView ='<button id="btn-View" class="btn btn-success" disabled>Ver</button>',
-		    btnEdit ='<button id="btn-Edit" class="btn btn-warning" disabled>Editar</button>',
-		    btnDelete ='<button id="btn-Delete" class="btn btn-danger" disabled>Eliminar</button>',
-		    btnNew ='<button id="btn-New" class="btn btn-primary">Nuevo</button>',
-		    btnPrint = '<button id="btn-Print" class="btn btn-primary">Imprimir</button>',
-		    btnReceipt = '<button id="btn-Receipt" class="btn btn-primary">Recibo</button>',
+		    btnView =	'<button id="btn-View" class="btn btn-success" disabled><span class="glyphicon glyphicon-eye-open visible-xs center-block"></span><span class="hidden-xs">&nbsp;&nbsp;Ver</span></button>',
+		    btnEdit =	'<button id="btn-Edit" class="btn btn-warning" disabled><span class="glyphicon glyphicon-file visible-xs center-block"></span><span class="hidden-xs">&nbsp;&nbsp;Editar</span></button>',
+		    btnDelete = '<button id="btn-Delete" class="btn btn-danger" disabled><span class="glyphicon glyphicon-trash visible-xs center-block"></span><span class="hidden-xs">&nbsp;&nbsp;Eliminar</span></button>',
+		    btnNew =	'<button id="btn-New" class="btn btn-primary"><span class="glyphicon glyphicon-plus visible-xs center-block"></span><span class="hidden-xs">&nbsp;&nbsp;Nuevo</span></button>',
+		    btnPrint =	'<button id="btn-Print" class="btn btn-primary"><span class="glyphicon glyphicon-print visible-xs center-block"></span><span class="hidden-xs">&nbsp;&nbsp;Imprimir</span></button>',
+		    btnReceipt ='<button id="btn-Receipt" class="btn btn-primary">Recibo</button>',
 		
 		    divContainer = '<div id="' + myTable.attr('id') + '-pbToolbar' + '" class="row">';
-			divContainer +=	'<div name="sectionForSearchBox" class="col-lg-3"></div>';
-			divContainer +=	'<div name="sectionForTags" class="col-lg-4"></div>';
-			divContainer +=	'<div name="sectionForButtons" class="col-lg-5 col-xs-12 col-sm-12 text-right"></div>';
-			divContainer +='</div>';
+			
+			divContainer +=	'<div name="sectionForButtons" class="col-lg-auto pull-right"></div>';
+		
+			divContainer +=	'<div name="sectionForSearchBox" class="col-xs-12 col-md-6 col-lg-4 pull-right" style="padding-right:0px;">';
+			divContainer +=		'<div name="divForSearchBox"">';
+			
+			if(options.toolbar.tags.length > 0 && options.isMobile == false){
+				divContainer +=			'<div class="input-group-btn">';
+				divContainer +=				'<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Tags&nbsp;&nbsp;<span class="caret"></span></button>';
+				divContainer +=				'<ul name="sectionForTags" class="dropdown-menu" role="menu"></ul>';
+				divContainer +=			'</div>'; //input-group-btn
+			}
+		
+			divContainer +=		'</div>'; //.input-group
+			divContainer +=	'</div>'; //sectionForSearchBox
+		
+			if(options.isMobile == false)
+				divContainer +=	'<div name="sectionForTitle" class="col-lg-3"><h1 style="margin-top:4px;">'+options.title+'</h1></div>';
+		
+			divContainer +=	'</div>'; //.row
 		
 		//Agrega fila para "No se encontraron resultados"
 		cantidadDeColumnas = $('#'+myTable.attr('id')+ ' thead tr:first th').length;
@@ -52,17 +72,17 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 			$(this).children('tbody').css('cursor', 'pointer');
 			$(this).children('tbody').children('tr').on('click', function(){
 				
-				if($(this).hasClass('warning')){
+				if($(this).hasClass(options.toolbar.selectedClass)){
 				    var thisTieneClass = 1;
 					$('#btn-View').attr('disabled', 'disabled');
 					$('#btn-Edit').attr('disabled', 'disabled');
 					$('#btn-Delete').attr('disabled', 'disabled');
 				}
 				
-				myTable.children('tbody').children('tr').removeClass('warning');
+				myTable.children('tbody').children('tr').removeClass(options.toolbar.selectedClass);
 				
 				if(thisTieneClass != 1){
-				    $(this).addClass('warning');
+				    $(this).addClass(options.toolbar.selectedClass);
 					$('#btn-View').removeAttr('disabled');
 					$('#btn-Edit').removeAttr('disabled');
 					$('#btn-Delete').removeAttr('disabled');
@@ -82,29 +102,40 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 		//Enable Toolbar
 		if(options.toolbar.enabled){
 			//Cargo el div contenedor
-			myTable.before(divContainer);
+			if(options.toolbar.idToAppend == 'undefined' || options.toolbar.idToAppend == false)
+				//Si no se especifica el div contenedor
+				myTable.before(divContainer);
+			else
+				$('#'+options.toolbar.idToAppend).append(divContainer);
 			
 			//Cargo el text-input
 			if(options.toolbar.filterBox){
-				$('#' + myTable.attr('id') + '-pbToolbar div[name="sectionForSearchBox"]').append(txtSearchBox);
+				$('#' + myTable.attr('id') + '-pbToolbar div[name="divForSearchBox"]').prepend(txtSearchBox);
 			};
 			
 			//Cargo los tags
-			if(options.toolbar.tags.length > 0 && options.toolbar.filterBox){
+			if(options.toolbar.tags.length > 0 && options.toolbar.filterBox && options.isMobile == false){
 				if(options_user.toolbar !== undefined && options_user.toolbar.tags !== undefined)
 					options.toolbar.tags = options_user.toolbar.tags;
 					
 				options.toolbar.tags.forEach(function(tag){
-					$('#' + myTable.attr('id') + '-pbToolbar div[name="sectionForTags"]').append(
-						'<button name="pbButtonTag" class="btn btn-link" input-search="search-'+myTable.attr('id')+'" toSearch="'+tag.toSearch+'">' + tag.display + '</button>'
+					$('#' + myTable.attr('id') + '-pbToolbar ul[name="sectionForTags"]').append(
+						'<li><a name="pbButtonTag"  input-search="search-'+myTable.attr('id')+'" toSearch="'+tag.toSearch+'" href="#">'+tag.display+'</a></li>'
 					);
 				});
-				$('button[name="pbButtonTag"]').click(function(e){
+				$('a[name="pbButtonTag"]').click(function(e){
 					var campoBusqueda = $('#' + $(this).attr('input-search'));
 					var textoBusqueda = $(this).attr('toSearch');
 					filtrarTabla(campoBusqueda, textoBusqueda);
 				});
+				
+				$('div[name="divForSearchBox"]').addClass('input-group');
 			};
+			
+			//Evento para la funcion de busqueda
+			$('input[search-in]').keyup(function(){
+				filtrarTabla($(this));
+			});
 			
 			//Cargo los botones
 			if(options.toolbar.buttons.length > 0 && options.toolbar.filterBox){
@@ -146,10 +177,7 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 				});
 			};
 			
-			//Evento para la funcion de busqueda
-			$('input[search-in]').keyup(function(){
-				filtrarTabla($(this));
-			});
+			
 		} //if options.toolbar enabled
 		
 		function onView(){
@@ -176,10 +204,13 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
                 options.onReceipt.call(this);
         }
 		
+		//Para menajar las acciones de teclado
 		$(document).on('keydown', function(e){
-			accionesDeTeclado(myTable, e, options.onView, options.onDelete);
+			accionesDeTeclado(myTable, e, options, options.onView, options.onDelete);
 		});
 		
+		//Esto lo hago para evitar hacer un CSS por dos lineas
+		$('.col-xs-auto, .col-sm-auto, .col-md-auto, .col-lg-auto').attr('style', 'width: auto;padding: 0 15px 0 0px;');
 		
 	};
 
@@ -195,18 +226,25 @@ License: licencia de Creative Commons Reconocimiento-NoComercial 3.0 Unported
 	});
 	
 	
-	function accionesDeTeclado(myTable, e, onView, onDelete){
-		if(myTable.children('tbody').children('tr').hasClass('warning')){ //Si hay seleccionado una fila
-			if(e.keyCode == 38) //Flecha arribla
-				$('#'+myTable.attr('id')+' tbody tr.warning').removeClass('warning').prev('tr').addClass('warning');
+	function accionesDeTeclado(myTable, e, options, onView, onDelete){
+		if(myTable.children('tbody').children('tr').hasClass(options.toolbar.selectedClass)){ //Si hay seleccionado una fila
 			
-			if(e.keyCode == 40) //Flecha abajo
-				$('#'+myTable.attr('id')+' tbody tr.warning').removeClass('warning').next('tr').addClass('warning');
 			
-			if(e.keyCode == 32 || e.keyCode == 13) //Barra espaciadora
+			//Flecha arribla(38)
+			if(e.keyCode == 38)
+				$('#'+myTable.attr('id')+' tbody tr.'+options.toolbar.selectedClass).removeClass(options.toolbar.selectedClass).prev('tr').addClass(options.toolbar.selectedClass);
+			
+			//Flecha abajo(40)
+			if(e.keyCode == 40){
+				$('#'+myTable.attr('id')+' tbody tr.'+options.toolbar.selectedClass).removeClass(options.toolbar.selectedClass).next('tr').addClass(options.toolbar.selectedClass);
+			}
+			
+			//Barra espaciadora(32) o Enter(13)
+			if( !($("input").is(":focus")) && (e.keyCode == 32 || e.keyCode == 13) )
 				onView();
 			
-			if(e.keyCode == 8 || e.keyCode == 46){ //Supr(8)  -- Delete(46)
+			//Supr(8)  -- Delete(46)
+			if( !($("input").is(":focus")) && (e.keyCode == 8 || e.keyCode == 46) ) {
 				e.preventDefault();
 				onDelete();
 			}
